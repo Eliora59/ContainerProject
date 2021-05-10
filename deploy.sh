@@ -40,7 +40,18 @@ infos() {
 
 }
 
+drop() {
+	echo "Suppression des conteneurs ..."
+	docker rm -f $(docker ps -a | grep $USER-centos | awk '{print $1}')
+	echo "Fin de la  suppression ..."
+}
 
 if [ "$1" == "--create" ];then
 	create
+
+elif [ "$1" == "--infos" ];then
+	infos
+
+elif [ "$1" == "--drop" ];then
+	drop
 fi
