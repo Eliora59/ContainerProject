@@ -46,6 +46,23 @@ drop() {
 	echo "Fin de la  suppression ..."
 }
 
+ansible(){
+	echo ""
+  	ANSIBLE_DIR="AnsibleProject"
+  	mkdir -p $ANSIBLE_DIR
+  	echo "all:" > $ANSIBLE_DIR/00_inventory.yml
+	echo "  vars:" >> $ANSIBLE_DIR/00_inventory.yml
+    echo "    ansible_python_interpreter: /usr/bin/python3" >> $ANSIBLE_DIR/00_inventory.yml
+  echo "  hosts:" >> $ANSIBLE_DIR/00_inventory.yml
+  for conteneur in $(docker ps -a | grep $USER-centos | awk '{print $1}');do      
+    docker inspect -f '    {{.NetworkSettings.IPAddress }}:' $conteneur >> $ANSIBLE_DIR/00_inventory.yml
+  done
+  mkdir -p $ANSIBLE_DIR/host_vars
+  mkdir -p $ANSIBLE_DIR/group_vars
+	echo ""
+}
+
+
 if [ "$1" == "--create" ];then
 	create
 
@@ -54,4 +71,7 @@ elif [ "$1" == "--infos" ];then
 
 elif [ "$1" == "--drop" ];then
 	drop
+
+elif [ "$1" == "--ansible" ];then
+	ansible
 fi
