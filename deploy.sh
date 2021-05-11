@@ -18,14 +18,14 @@ Options :
 }
 
 create() {
-    docker run -tid --rm --privileged --name $USER-centos -h $USER-centos zeorus-centos /usr/sbin/init
-	docker exec -ti $USER-centos /bin/sh -c "useradd $USER"
-	docker exec -ti $USER-centos /bin/sh -c "mkdir  ${HOME}/.ssh && chmod 700 ${HOME}/.ssh && chown $USER:$USER $HOME/.ssh"
-	docker cp $HOME/.ssh/id_rsa.pub $USER-centos:$HOME/.ssh/authorized_keys
-	docker exec -ti $USER-centos /bin/sh -c "chmod 600 ${HOME}/.ssh/authorized_keys && chown $USER:$USER $HOME/.ssh/authorized_keys"
-	docker exec -ti $USER-centos /bin/sh -c "echo '$USER   ALL=(ALL) NOPASSWD: ALL'>>/etc/sudoers"
-	docker exec -ti $USER-centos /bin/sh -c "systemctl start sshd"
-	echo "Conteneur $USER-centos créé"
+    docker run -tid --rm --privileged --name $USER-$2 -h $USER-$2 zeorus-$2 /usr/sbin/init
+	docker exec -ti $USER-$2 /bin/sh -c "useradd $USER"
+	docker exec -ti $USER-$2 /bin/sh -c "mkdir  ${HOME}/.ssh && chmod 700 ${HOME}/.ssh && chown $USER:$USER $HOME/.ssh"
+	docker cp $HOME/.ssh/id_rsa.pub $USER-$2:$HOME/.ssh/authorized_keys
+	docker exec -ti $USER-$2 /bin/sh -c "chmod 600 ${HOME}/.ssh/authorized_keys && chown $USER:$USER $HOME/.ssh/authorized_keys"
+	docker exec -ti $USER-$2 /bin/sh -c "echo '$USER   ALL=(ALL) NOPASSWD: ALL'>>/etc/sudoers"
+	docker exec -ti $USER-$2 /bin/sh -c "systemctl start sshd"
+	echo "Conteneur $USER-$2 créé"
 	infos
 }
 
@@ -33,7 +33,7 @@ infos() {
 	echo ""
 	echo "Informations des conteneurs : "
 	echo ""
-	for conteneur in $(docker ps -a | grep $USER-centos | awk '{print $1}');do      
+	for conteneur in $(docker ps -a | grep $USER-$2 | awk '{print $1}');do      
 		docker inspect -f '   => {{.Name}} - {{.NetworkSettings.IPAddress }}' $conteneur
 	done
 	echo ""
@@ -42,7 +42,7 @@ infos() {
 
 drop() {
 	echo "Suppression des conteneurs ..."
-	docker rm -f $(docker ps -a | grep $USER-centos | awk '{print $1}')
+	docker rm -f $(docker ps -a | grep $USER-$2 | awk '{print $1}')
 	echo "Fin de la  suppression ..."
 }
 
@@ -54,7 +54,7 @@ ansible(){
 	echo "  vars:" >> $ANSIBLE_DIR/00_inventory.yml
     echo "    ansible_python_interpreter: /usr/bin/python3" >> $ANSIBLE_DIR/00_inventory.yml
   echo "  hosts:" >> $ANSIBLE_DIR/00_inventory.yml
-  for conteneur in $(docker ps -a | grep $USER-centos | awk '{print $1}');do      
+  for conteneur in $(docker ps -a | grep $USER-$2 | awk '{print $1}');do      
     docker inspect -f '    {{.NetworkSettings.IPAddress }}:' $conteneur >> $ANSIBLE_DIR/00_inventory.yml
   done
   mkdir -p $ANSIBLE_DIR/host_vars
