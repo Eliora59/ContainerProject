@@ -18,7 +18,7 @@ Options :
 }
 
 create() {
-    docker run -tid --privileged --name $USER-centos -h $USER-centos zeorus-centos /usr/sbin/init
+    docker run -tid --rm --privileged --name $USER-centos -h $USER-centos zeorus-centos /usr/sbin/init
 	docker exec -ti $USER-centos /bin/sh -c "useradd $USER"
 	docker exec -ti $USER-centos /bin/sh -c "mkdir  ${HOME}/.ssh && chmod 700 ${HOME}/.ssh && chown $USER:$USER $HOME/.ssh"
 	docker cp $HOME/.ssh/id_rsa.pub $USER-centos:$HOME/.ssh/authorized_keys
