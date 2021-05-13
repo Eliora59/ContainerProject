@@ -1,4 +1,4 @@
-FROM debian:10
+FROM jrei/systemd-debian:10
 
 ENV container docker
 ENV LC_ALL C
