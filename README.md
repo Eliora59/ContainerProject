@@ -12,7 +12,7 @@ cd ContainerProject/DockerFiles/CentOS
 
 docker build -t="zeorus-centos" ContainerProject/DockerFiles/CentOS/.
 
-## title
+## Deploy your container
 
 ### Create a docker to test your playbook
 
