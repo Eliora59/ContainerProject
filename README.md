@@ -10,9 +10,11 @@ chmod +x ContainerProject/centos-deploy.sh
 
 cd ContainerProject/DockerFiles/CentOS
 
-docker build -t="zeorus-centos" ContainerProject/DockerFiles/CentOS/
+docker build -t="zeorus-centos" ContainerProject/DockerFiles/CentOS/.
 
-#### Deploy your container
+## Deploy your container
+
+zea zae
 
 ### Create a docker to test your playbook
 
