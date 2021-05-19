@@ -14,8 +14,6 @@ docker build -t="zeorus-centos" ContainerProject/DockerFiles/CentOS/.
 
 ## Deploy your container
 
-zea zae
-
 ### Create a docker to test your playbook
 
 ./centos-deploy.sh --create
