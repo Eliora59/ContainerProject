@@ -1,5 +1,7 @@
 # ContainerProject
 
+The goal of the project is to deploy some container faster to provider an environment to test some playbook or role with Ansible
+
 ## Get started
 
 $ git clone https://github.com/Eliora59/ContainerProject.git
