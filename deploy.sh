@@ -1,5 +1,4 @@
 #!/bin/bash
-set -u
 
 help() {
 echo "
@@ -73,7 +72,7 @@ elif [ "$1" == "--drop" ];then
 
 elif [ "$1" == "--ansible" ];then
 	ansible
-	
+
 elif [ "$1" == "" ];then
 	help
 fi
