@@ -1,6 +1,6 @@
 # ContainerProject
 
-The goal of the project is to deploy some container faster to provider an environment to test some playbook or role with Ansible
+The goal of the project is to deploy some container faster to provide an environment to test some playbook or role with Ansible
 
 ## Get started
 
