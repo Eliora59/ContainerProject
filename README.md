@@ -4,7 +4,7 @@
 
 $ git clone https://github.com/Eliora59/ContainerProject.git
 
-You need to being add in the docker group
+You need to being add in the docker group (Don't forget to restart your session)
 
 $ sudo usermod -a -G docker theophile
 
