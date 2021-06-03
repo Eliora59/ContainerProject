@@ -33,7 +33,7 @@ $ deploy.sh
 
 $ deploy.sh --create
 
-#### To have the infos of your docker
+#### To get infos of your docker
 
 $ deploy.sh --infos
 
