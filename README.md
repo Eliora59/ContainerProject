@@ -2,26 +2,43 @@
 
 ## Get started
 
-git clone https://github.com/Eliora59/ContainerProject.git
+$ git clone https://github.com/Eliora59/ContainerProject.git
+
+You need to being add in the docker group
+
+$ sudo usermod -a -G docker theophile
 
 ## Build Dockerfile
 
-chmod +x ContainerProject/deploy.sh
+$ cd ContainerProject/DockerFiles/CentOS
 
-cd ContainerProject/DockerFiles/CentOS
+$ docker build -t="zeorus-centos" ContainerProject/DockerFiles/CentOS/.
 
-docker build -t="zeorus-centos" ContainerProject/DockerFiles/CentOS/.
+## Install the script
+
+$ sudo chmod +x ContainerProject/deploy.sh
+
+$ sudo cp ContainerProject/deploy.sh /usr/bin/local
 
 ## Deploy your container
 
-### Create a docker to test your playbook
+#### To have the help
 
-./deploy.sh --create
+$ deploy.sh
 
-### Delete your docker when you finish your playbook
+#### Create your docker to test your playbook and role
+(Auto-destroy when session or computer is restarted)
 
-./deploy.sh --drop
+$ deploy.sh --create
 
-### To have the help
+#### To have the infos of your docker
 
-./deploy.sh
+$ deploy.sh --infos
+
+#### To remove your docker
+
+$ deploy.sh --drop
+
+#### To create an inventory Ansible with your docker
+
+$ deploy.sh --ansible
