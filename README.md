@@ -6,7 +6,7 @@ The goal of the project is to deploy some container faster to provide an environ
 
 $ git clone https://github.com/Eliora59/ContainerProject.git
 
-You need to being add in the docker group (Don't forget to restart your session)
+You need to add your user in the docker group (Don't forget to restart your session)
 
 $ sudo usermod -a -G docker theophile
 
