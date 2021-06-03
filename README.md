@@ -24,7 +24,7 @@ $ sudo cp ContainerProject/deploy.sh /usr/bin/local
 
 ## Deploy your container
 
-#### To have the help
+#### To get help
 
 $ deploy.sh
 
