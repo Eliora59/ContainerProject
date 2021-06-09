@@ -16,6 +16,15 @@ Options :
 }
 
 create() {
+	nb_machine=1
+	[ "$1" != "" ] && nb_machine=$1
+	min=1
+	max=0
+	idmax=`docker ps -a --format '{{ .Names}}' | awk -F "-" -v user="$USER" '$0 ~ user"-debian" {print $3}' | sort -r |head -1`
+	min=$(($idmax + 1))
+	max=$(($idmax + $nb_machine))
+
+
     docker run -tid --rm --privileged --name $USER-centos -h $USER-centos zeorus-centos /usr/sbin/init
 	docker exec -ti $USER-centos /bin/sh -c "useradd $USER"
 	docker exec -ti $USER-centos /bin/sh -c "mkdir  ${HOME}/.ssh && chmod 700 ${HOME}/.ssh && chown $USER:$USER $HOME/.ssh"
